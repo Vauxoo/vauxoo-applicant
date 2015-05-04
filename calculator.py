@@ -3,5 +3,5 @@
 
 class calculator_class:
 
-    def sum(num_list):
-        pass
+    def sum(self, num_list):
+        return "not implement yet"  # Remove this dummy line

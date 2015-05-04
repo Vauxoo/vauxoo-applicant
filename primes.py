@@ -4,4 +4,4 @@
 class prime_class:
 
     def is_prime(num_int):
-        pass
+        return "not implement yet"  # Remove this dummy line
