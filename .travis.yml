@@ -14,9 +14,9 @@ install:
 
 script:
   - psql -d employee_employee -a -f ${TRAVIS_BUILD_DIR}/employee_vauxoo.sql
-  - psql -d employee_employee -c "SELECT * FROM employee"
-  - psql -d employee_employee -c "SELECT * FROM employee_department"
-  - psql -d employee_employee -c "SELECT * FROM employee_hobby"
+  - psql -d employee_employee -c "SELECT * FROM employee" >employee.out && cat employee.out
+  - psql -d employee_employee -c "SELECT * FROM employee_department" >employee_department.out && cat employee_department.out
+  - psql -d employee_employee -c "SELECT * FROM employee_hobby" >employee_hobby.out && cat employee_hobby.out
   - flake8 ${TRAVIS_BUILD_DIR}/ --exclude=__init__.py
   - PYTHONPATH=${TRAVIS_BUILD_DIR} python -c "from calculator import calculator_class;obj=calculator_class();mysum=obj.sum([1,2,3,4,5,6]);exit(not (mysum==21 or mysum=='not implement yet'))"
   - PYTHONPATH=${TRAVIS_BUILD_DIR} python -c "from primes import prime_class;obj=prime_class();primes_result=all(map(lambda num: isinstance(num, int), [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101,103,107]));exit(not (primes_result or primes_result == 'not implement yet'))"
