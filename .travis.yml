@@ -14,10 +14,11 @@ install:
   - sudo su -c "sudo -u postgres /usr/lib/postgresql/9.3/bin/postgres -c "config_file=/etc/postgresql/9.3/main/postgresql.conf" > /tmp/pg.log 2>&1 & sleep 5s"
 
   - createdb employee_employee
-  - pip install flake8
+  - pip install flake8 pylint
 
 script:
   - flake8 ${TRAVIS_BUILD_DIR}/ --exclude=__init__.py
+  - pylint --rcfile=${TRAVIS_BUILD_DIR}/.pylint.cfg ${TRAVIS_BUILD_DIR}/*.py
   - python ${TRAVIS_BUILD_DIR}/.all_unittest.py
   - psql -d employee_employee -a -f ${TRAVIS_BUILD_DIR}/employee_vauxoo.sql
   - psql -d employee_employee -c "SELECT * FROM employee" --output=/tmp/employee.out
