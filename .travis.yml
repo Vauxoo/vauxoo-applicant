@@ -1,0 +1,18 @@
+language: python
+
+python:
+  - "2.7"
+
+virtualenv:
+  system_site_packages: true
+
+install:
+  - createdb employee_employee
+  - pip install flake8
+
+script:
+  - psql -d employee_employee -a -f ${TRAVIS_BUILD_DIR}/employee_vauxoo.sql
+  - flake8 ${TRAVIS_BUILD_DIR}/ --exclude=__init__.py
+  - python ${TRAVIS_BUILD_DIR}/calculator.py
+  - python ${TRAVIS_BUILD_DIR}/primes.py
+  # - python ${TRAVIS_BUILD_DIR}/calculator_test.py  # interactive mode. TODO: test it a interactive python script.
