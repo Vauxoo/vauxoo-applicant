@@ -38,7 +38,7 @@ class TestApplicant(unittest.TestCase):
         if self.obj_prime.is_prime(0) != 'not implement yet':
             primes_result = all(
                 [
-                    self.obj_prime.is_prime(num) == True \
+                    self.obj_prime.is_prime(num) is True
                     for num in [2, 3, 5, 7, 11, 13, 17, 19, 23, 29,
                                 31, 37, 41, 43, 47, 53, 59, 61, 67,
                                 71, 73, 79, 83, 89, 97, 101, 103, 107]
@@ -51,7 +51,7 @@ class TestApplicant(unittest.TestCase):
 
             no_primes_result = all(
                 [
-                    self.obj_prime.is_prime(num) == False \
+                    self.obj_prime.is_prime(num) is False
                     for num in [1, 4, 6, 8, 9, 10, 12, 14,
                                 15, 16, 18, 20, 21, 22, 24,
                                 25]
