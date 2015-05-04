@@ -4,8 +4,8 @@ Script to test applicant project
 
 import unittest
 
-from calculator import calculator_class
-from primes import prime_class
+from calculator import CalculatorClass
+from primes import PrimeClass
 
 
 class TestApplicant(unittest.TestCase):
@@ -17,8 +17,8 @@ class TestApplicant(unittest.TestCase):
         """
         Method init of global unittest class
         """
-        self.obj_calculator = calculator_class()
-        self.obj_prime = prime_class()
+        self.obj_calculator = CalculatorClass()
+        self.obj_prime = PrimeClass()
 
     def test_01_sum(self):
         """
