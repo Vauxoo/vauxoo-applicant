@@ -23,6 +23,6 @@ script:
   - psql -d employee_employee -c "SELECT * FROM employee_hobby" >employee_hobby.out && cat employee_hobby.out
   - flake8 ${TRAVIS_BUILD_DIR}/ --exclude=__init__.py
   - PYTHONPATH=${TRAVIS_BUILD_DIR} python -c "from calculator import calculator_class;obj=calculator_class();mysum=obj.sum([1,2,3,4,5,6]);exit(not (mysum==21 or mysum=='not implement yet'))"
-  - PYTHONPATH=${TRAVIS_BUILD_DIR} python -c "from primes import prime_class;obj=prime_class();primes_result=all(map(lambda num: isinstance(num, int), [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101,103,107]));exit(not (primes_result or primes_result == 'not implement yet'))"
-  - PYTHONPATH=${TRAVIS_BUILD_DIR} python -c "from primes import prime_class;obj=prime_class();no_primes_result=all(map(lambda num: isinstance(num, int), [1,4,6,8,9,10,12,14,15,16,18,20,21,22,24,25]));exit(no_primes_result or not no_primes_result == 'not implement yet'))"
+  - PYTHONPATH=${TRAVIS_BUILD_DIR} python -c "from primes import prime_class;obj=prime_class();primes_result=all(map(lambda num: obj.is_prime(num) == 'not implement yet' or obj.is_prime(num), [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101,103,107]));exit(not primes_result)"
+  - PYTHONPATH=${TRAVIS_BUILD_DIR} python -c "from primes import prime_class;obj=prime_class();no_primes_result=all(map(lambda num: obj.is_prime(num) != 'not implement yet' and obj.is_prime(num), [1,4,6,8,9,10,12,14,15,16,18,20,21,22,24,25]));print "no_primes_result",no_primes_result;exit(no_primes_result)"
   # - python ${TRAVIS_BUILD_DIR}/calculator_test.py  # interactive mode. TODO: test it a interactive python script.
