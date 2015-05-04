@@ -1,6 +1,7 @@
 -- Your sql code in this file
 -- NOTE: Please, don't add sentence to create database in this script file.
 --       You can create database locally to test it.
+--       Consider add ';' at end sentence.
 
 CREATE TABLE employee (
 );
