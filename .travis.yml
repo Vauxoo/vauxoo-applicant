@@ -1,0 +1,29 @@
+language: python
+
+build_image: vauxoo/odoo-80-image-shippable-auto
+
+python:
+  - "2.7"
+
+virtualenv:
+  system_site_packages: true
+
+install:
+  # shippable compatibility
+  - sudo mkdir -p /etc/ssl/private-copy; sudo mkdir -p /etc/ssl/private; sudo mv /etc/ssl/private/* /etc/ssl/private-copy/; sudo rm -r /etc/ssl/private; sudo mv /etc/ssl/private-copy /etc/ssl/private; sudo chmod -R 0700 /etc/ssl/private; sudo chown -R postgres /etc/ssl/private
+  - sudo su -c "sudo -u postgres /usr/lib/postgresql/9.3/bin/postgres -c "config_file=/etc/postgresql/9.3/main/postgresql.conf" > /tmp/pg.log 2>&1 & sleep 5s"
+
+  - createdb employee_employee
+  - pip install flake8 pylint
+
+script:
+  - flake8 ${TRAVIS_BUILD_DIR}/ --exclude=__init__.py
+  - pylint --rcfile=${TRAVIS_BUILD_DIR}/.pylint.cfg ${TRAVIS_BUILD_DIR}/*.py
+  - python ${TRAVIS_BUILD_DIR}/.all_unittest.py
+  - psql -d employee_employee -a -f ${TRAVIS_BUILD_DIR}/employee_vauxoo.sql
+  - psql -d employee_employee -c "SELECT * FROM employee" --output=/tmp/employee.out
+  - cat /tmp/employee.out
+  - psql -d employee_employee -c "SELECT * FROM employee_department" --output=/tmp/employee_department.out
+  - cat /tmp/employee_department.out
+  - psql -d employee_employee -c "SELECT * FROM employee_hobby" --output=/tmp/employee_hobby.out
+  - cat /tmp/employee_hobby.out
