@@ -2,6 +2,7 @@
 Your module documentation here
 """
 
+
 class CalculatorClass(object):
     """
     Your class documentation here

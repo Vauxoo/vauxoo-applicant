@@ -2,6 +2,7 @@
 Your module documentation here
 """
 
+
 class PrimeClass(object):
     """
     Your class documentation here
