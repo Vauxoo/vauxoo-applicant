@@ -37,7 +37,7 @@ class TestApplicantPython(unittest.TestCase):
         UnitTest method to check primes method
         """
         print "start test:" + \
-            self.test_02_db_records_requested.__doc__
+            self.test_20_primes.__doc__
         if self.obj_prime.is_prime(0) != 'not implement yet':
             primes_result = all(
                 [
@@ -65,7 +65,7 @@ class TestApplicantPython(unittest.TestCase):
                 True,
                 'incorrect prime method with not primes numbers')
         print "end test:" + \
-            self.test_02_db_records_requested.__doc__
+            self.test_20_primes.__doc__
 
 
 if __name__ == '__main__':
