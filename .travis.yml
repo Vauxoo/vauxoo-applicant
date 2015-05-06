@@ -21,6 +21,7 @@ script:
   - pylint --rcfile=${TRAVIS_BUILD_DIR}/.pylint.cfg ${TRAVIS_BUILD_DIR}/*.py
   - python ${TRAVIS_BUILD_DIR}/.all_unittest.py
   - psql -d employee_employee -a -f ${TRAVIS_BUILD_DIR}/employee_vauxoo.sql
+  - python ${TRAVIS_BUILD_DIR}/.psql_unittest.py
   - psql -d employee_employee -c "SELECT * FROM employee" --output=/tmp/employee.out
   - cat /tmp/employee.out
   - psql -d employee_employee -c "SELECT * FROM employee_department" --output=/tmp/employee_department.out

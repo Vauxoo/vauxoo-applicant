@@ -17,8 +17,18 @@ You can install with next commands:
 You can execute test locally with next commands:
 ```bash
 cd vauxoo-applicant/
-flake8 . --exclude=__init__.py && echo $?
-pylint --rcfile=.pylint.cfg *.py && echo $?
-python .all_unittest.py && echo $?
+flake8 . --exclude=__init__.py && echo $?  # python guidelines
+pylint --rcfile=.pylint.cfg *.py && echo $?  # python guidelines
+python .all_unittest.py && echo $?  # Execute unittest for python
 ```
-If exit with 0 (zero) each command your code is very good!
+If exit with 0 (zero) each command and don't show errors your code is very good!
+
+NOTE2: Your PR will test postgres script too.
+You can execute this test locally with next commands:
+```bash
+createdb employee_employee  # create database (First remove if exists with "dropdb employee_employee")
+cd vauxoo-applicant/
+psql -d employee_employee -U postgres -a -f ./employee_vauxoo.sql  # Execute sql file
+python ./.psql_unittest.py && echo $?  # Execute unittest for postgresql
+```
+If exit with 0 (zero) last command and don't show errors your code is very good!
