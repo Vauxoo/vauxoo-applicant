@@ -20,6 +20,7 @@ script:
   - flake8 ${TRAVIS_BUILD_DIR}/ --exclude=__init__.py
   - pylint --rcfile=${TRAVIS_BUILD_DIR}/.pylint.cfg ${TRAVIS_BUILD_DIR}/*.py
   - python ${TRAVIS_BUILD_DIR}/.all_unittest.py
+  - python ${TRAVIS_BUILD_DIR}/.psql_unittest.py
   - psql -d employee_employee -a -f ${TRAVIS_BUILD_DIR}/employee_vauxoo.sql
   - psql -d employee_employee -c "SELECT * FROM employee" --output=/tmp/employee.out
   - cat /tmp/employee.out
