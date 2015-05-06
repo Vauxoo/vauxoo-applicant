@@ -1,3 +1,6 @@
+
+# pylint: disable=E1601
+
 """
 Script to test postgres scripts for applicant project
 """
@@ -24,6 +27,10 @@ def run_psql_query(query, dbname):
 
 
 def psql_output2list(psql_output):
+    """
+    Method to run a psql query command in OS
+    and return list of rows
+    """
     newline_count = 0
     lines = []
     for line in psql_output.split('\n'):
@@ -42,6 +49,11 @@ def psql_output2list(psql_output):
 
 
 def psql_output2dict(psql_output):
+    """
+    Method to run a psql query command in OS
+    and return dicts of rows
+    where first row is header of keys.
+    """
     psql_list = psql_output2list(psql_output)
     return [dict(zip(psql_list[0], row)) for row in psql_list[1:]]
 
@@ -136,11 +148,12 @@ class TestApplicantPostgres(unittest.TestCase):
                 " expected in table '%s'."
                 % (table_name))
 
-        query = """SELECT table_name
-                FROM information_schema.tables
-                WHERE  table_schema='public'
-                AND table_name NOT IN (%s)""" % (
-                "'" + "','".join(self.required_tables) + "'")
+        query = """
+            SELECT table_name
+            FROM information_schema.tables
+            WHERE  table_schema='public'
+            AND table_name NOT IN (%s)""" % \
+            ("'" + "','".join(self.required_tables) + "'")
         res = run_psql_query(query, self.dbname)
         res_dict = psql_output2dict(res)
         if len(res_dict) == 0:
@@ -178,9 +191,10 @@ class TestApplicantPostgres(unittest.TestCase):
             res_dict = psql_output2dict(res)
             if len(res_dict) == 0:
                 print "WARNING: '%s' Not implement yet" % (table_name, )
-                return True
             self.assertEqual(
-                self.required_records[table_name], len(res_dict),
+                self.required_records[table_name] == len(res_dict)
+                or len(res_dict) == 0,
+                True,
                 "Request records in table '%s'=%d. Records found=%d"
                 % (
                     table_name,

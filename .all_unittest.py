@@ -1,3 +1,6 @@
+
+# pylint: disable=E1601
+
 """
 Script to test python scripts for applicant project
 """
