@@ -136,7 +136,7 @@ class TestApplicantPostgres(unittest.TestCase):
             column_names = [row['column_name'] for row in res_dict]
             if len(column_names) == 0:
                 print "WARNING: '%s' Not implement yet" % (table_name, )
-                return True
+                continue
             for required_field in self.required_fields[table_name]:
                 self.assertEqual(
                     required_field in column_names, True,
@@ -148,6 +148,7 @@ class TestApplicantPostgres(unittest.TestCase):
                 " expected in table '%s'."
                 % (table_name))
 
+        # Get all aditional tables (don't exists in required tables)
         query = """
             SELECT table_name
             FROM information_schema.tables
@@ -157,22 +158,23 @@ class TestApplicantPostgres(unittest.TestCase):
         res = run_psql_query(query, self.dbname)
         res_dict = psql_output2dict(res)
         if len(res_dict) == 0:
-            print "WARNING: Relation not implement yet"
-            return True
+            print "WARNING: SECRET TEST CASE not implement yet"
         self.assertEqual(
             len(res_dict) in (0, 1), True,
             "You have created different quantity of tables expected.")
-        new_table = res_dict[0]['table_name']
-        query = """SELECT column_name
-                    FROM information_schema.columns
-                    WHERE table_name = '%s'""" % new_table
-        res = run_psql_query(query, self.dbname)
-        res_dict = psql_output2dict(res)
-        column_names = [row['column_name'] for row in res_dict]
-        self.assertEqual(
-            len(column_names), 2,
-            "You have different quantity of columns" +
-            " expected in table '%s'." % new_table)
+
+        if len(res_dict) == 1:
+            new_table = res_dict[0]['table_name']
+            query = """SELECT column_name
+                        FROM information_schema.columns
+                        WHERE table_name = '%s'""" % new_table
+            res = run_psql_query(query, self.dbname)
+            res_dict = psql_output2dict(res)
+            column_names = [row['column_name'] for row in res_dict]
+            self.assertEqual(
+                len(column_names), 2,
+                "You have different quantity of columns" +
+                " expected in table '%s'." % new_table)
         print "End test:" + \
               self.test_10_db_fields_requested.__doc__
 
