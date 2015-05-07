@@ -28,7 +28,7 @@ You can execute this test locally with next commands:
 ```bash
 createdb employee_employee  # create database (First remove if exists with "dropdb employee_employee")
 cd vauxoo-applicant/
-psql -d employee_employee -U postgres -a -f ./employee_vauxoo.sql  # Execute sql file
-python ./.psql_unittest.py && echo $?  # Execute unittest for postgresql
+psql -d employee_employee -U postgres -a -f ./employee_vauxoo.sql  # Execute sql file.
+PG_USER='' python ./.psql_unittest.py && echo $?  # Execute unittest for postgresql. Set PG_USER with your postgresql rol
 ```
 If exit with 0 (zero) last command and don't show errors your code is very good!

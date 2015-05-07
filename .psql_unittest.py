@@ -5,8 +5,12 @@
 Script to test postgres scripts for applicant project
 """
 
+import os
 import subprocess
 import unittest
+
+
+PG_USER = os.environ.get('PG_USER', False)
 
 
 def run_output(cmd, cwd=None):
@@ -22,6 +26,8 @@ def run_psql_query(query, dbname):
     Method to run a psql query command in OS
     """
     cmd = ['psql', '-d', dbname, '-c', query]
+    if PG_USER:
+        cmd.extend(['-U', PG_USER])
     res = run_output(cmd)
     return res
 
