@@ -29,6 +29,6 @@ You can execute this test locally with next commands:
 createdb employee_employee -U postgres # create database (First remove if exists with "dropdb employee_employee")
 cd vauxoo-applicant/
 PGPORT=5432 psql -d employee_employee -U postgres -h localhost -a -f ./employee_vauxoo.sql  # Execute sql file.
-PGPORT=5432 PG_USER='postgres' python ./.psql_unittest.py && echo $?  # Execute unittest for postgresql.
+PGHOST=localhost PGPORT=5432 PG_USER='postgres' python ./.psql_unittest.py && echo $?  # Execute unittest for postgresql.
 ```
 If exit with 0 (zero) last command and don't show errors your code is very good!
