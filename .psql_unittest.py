@@ -81,7 +81,7 @@ class TestApplicantPostgres(unittest.TestCase):
         ]
         self.required_fields = {
             'employee': [
-                'id', 'name', 'description',
+                'id', 'first_name', 'last_name',
             ],
             'employee_department': [
                 'id', 'name', 'description',
