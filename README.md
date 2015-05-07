@@ -19,7 +19,7 @@ You can execute test locally with next commands:
 cd vauxoo-applicant/
 flake8 . --exclude=__init__.py && echo $?  # python guidelines
 pylint --rcfile=.pylint.cfg *.py && echo $?  # python guidelines
-python .all_unittest.py && echo $?  # Execute unittest for python
+python2.7 .all_unittest.py && echo $?  # Execute unittest for python
 ```
 If exit with 0 (zero) each command and don't show errors your code is very good!
 
