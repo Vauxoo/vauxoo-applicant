@@ -200,8 +200,8 @@ class TestApplicantPostgres(unittest.TestCase):
             if len(res_dict) == 0:
                 print "WARNING: '%s' Not implement yet" % (table_name, )
             self.assertEqual(
-                self.required_records[table_name] == len(res_dict)
-                or len(res_dict) == 0,
+                self.required_records[table_name] == len(res_dict) or
+                len(res_dict) == 0,
                 True,
                 "Request records in table '%s'=%d. Records found=%d"
                 % (
